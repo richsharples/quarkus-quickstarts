@@ -17,4 +17,6 @@ jobs:
         uses: docker://maven:3-eclipse-temurin-17
         shell: sh
         run: |
-          mvn clean verify -Dtest="*,!MySql*,!Postgres*"
+          echo "bulding Quarkus tutorial"
+          mvn "io.quarkus.platform:quarkus-maven-plugin:create" -DprojectGroupId="com.redhat.developers" -DprojectArtifactId="tutorial-app" -DprojectVersion="1.0-SNAPSHOT" -Dextensions=resteasy-reactive
+
