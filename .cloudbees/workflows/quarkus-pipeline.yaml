@@ -1,0 +1,20 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: Quarkus pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    steps:
+      - name: Checkout
+        uses: cloudbees-io/checkout@v1
+    
+      - name: Maven build
+        uses: docker://maven:3-eclipse-temurin-17
+        shell: sh
+        run: |
+          mvn clean verify -Dtest="*,!MySql*,!Postgres*"
