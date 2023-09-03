@@ -1,21 +1,27 @@
 apiVersion: automation.cloudbees.io/v1alpha1
-name: Build
+kind: workflow
+name: Petclinic pipeline
 
 on:
   push:
     branches:
-      - '**'
+      - main
 
 jobs:
-  build:
-    name: Build Java
-    runs-on: ubuntu-latest
-    
+  c-first-step:
     steps:
-      - uses: cb-actions/checkout@v2
+      - name: First
+        uses: cloudbees-io/checkout@v1
+  a-second-step:
+    steps:
+      - name: First
+        uses: cloudbees-io/checkout@v1
+  build:
+    steps:
       - name: Checkout
-
-      - name: Build with Maven
-        run: export LANG=en_US && ./mvnw -e -B -fae --settings .github/mvn-settings.xml clean install -Dstart-containers
-
-      
+        uses: cloudbees-io/checkout@v1
+      - name: Maven build
+        uses: docker://maven:3-eclipse-temurin-17
+        shell: sh
+        run: |
+          mvn clean verify -Dtest="*,!MySql*,!Postgres*"
