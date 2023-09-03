@@ -18,5 +18,8 @@ jobs:
         shell: sh
         run: |
           echo "bulding Quarkus tutorial"
-          mvn "io.quarkus.platform:quarkus-maven-plugin:create" -DprojectGroupId="com.redhat.developers" -DprojectArtifactId="tutorial-app" -DprojectVersion="1.0-SNAPSHOT" -Dextensions=resteasy-reactive
-
+          mvn io.quarkus.platform:quarkus-maven-plugin:3.3.1:create \
+            -DprojectGroupId=org.acme \
+            -DprojectArtifactId=getting-started \
+            -Dextensions='resteasy-reactive'
+          echo "build complete"
