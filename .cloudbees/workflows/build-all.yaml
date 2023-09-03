@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: Petclinic pipeline
+name: Quarkus pipeline
 
 on:
   push:
@@ -8,18 +8,11 @@ on:
       - main
 
 jobs:
-  c-first-step:
-    steps:
-      - name: First
-        uses: cloudbees-io/checkout@v1
-  a-second-step:
-    steps:
-      - name: First
-        uses: cloudbees-io/checkout@v1
   build:
     steps:
       - name: Checkout
         uses: cloudbees-io/checkout@v1
+    
       - name: Maven build
         uses: docker://maven:3-eclipse-temurin-17
         shell: sh
